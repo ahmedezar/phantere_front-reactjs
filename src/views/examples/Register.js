@@ -1,22 +1,3 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.4
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2024 Panthére (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Panthére
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-// reactstrap components
 import {
   Button,
   Card,
@@ -31,8 +12,38 @@ import {
   Row,
   Col,
 } from "reactstrap";
-
+import {useState} from 'react';
+import { Navigate } from 'react-router-dom';
 const Register = () => {
+const [name, setName] = useState("");
+const [surname, setSurName] = useState("");
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [redirect, setRedirect] =useState(false);
+const submit = async (e) =>{
+  e.preventDefault();
+ await fetch('http://localhost:4000/auth/signup', {
+    method: 'POST',
+    headers: { "content-type": "application/json" },   
+     body: JSON.stringify({
+     name ,
+     surname,
+      email,
+      password
+      
+  }
+  )
+});
+    
+
+setRedirect(true);
+
+}
+
+if (redirect ){
+  return < Navigate to="/auth/login"/>;
+}
+
   return (
     <>
       <Col lg="6" md="8">
@@ -82,7 +93,7 @@ const Register = () => {
             <div className="text-center text-muted mb-4">
               <small>Or sign up with credentials</small>
             </div>
-            <Form role="form">
+            <Form role="form" onSubmit={submit}>
               <FormGroup>
                 <InputGroup className="input-group-alternative mb-3">
                   <InputGroupAddon addonType="prepend">
@@ -90,7 +101,17 @@ const Register = () => {
                       <i className="ni ni-hat-3" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input placeholder="Name" type="text" />
+                  <Input placeholder="Name" type="text" onChange={e => setName(e.target.value)} />
+                </InputGroup>
+              </FormGroup>
+              <FormGroup>
+                <InputGroup className="input-group-alternative mb-3">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-hat-3" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input placeholder="SurName" type="text" onChange={e => setSurName(e.target.value)} />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
@@ -104,6 +125,7 @@ const Register = () => {
                     placeholder="Email"
                     type="email"
                     autoComplete="new-email"
+                    onChange={e => setEmail(e.target.value)} 
                   />
                 </InputGroup>
               </FormGroup>
@@ -118,6 +140,7 @@ const Register = () => {
                     placeholder="Password"
                     type="password"
                     autoComplete="new-password"
+                    onChange={e => setPassword(e.target.value)} 
                   />
                 </InputGroup>
               </FormGroup>
@@ -150,7 +173,7 @@ const Register = () => {
                 </Col>
               </Row>
               <div className="text-center">
-                <Button className="mt-4" color="primary" type="button">
+                <Button className="mt-4" color="primary" type="submit" >
                   Create account
                 </Button>
               </div>

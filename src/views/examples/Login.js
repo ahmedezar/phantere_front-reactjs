@@ -13,9 +13,50 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
+import { useState } from "react";
+
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [redirect, setRedirect] = useState("");
+
+const submit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch('http://localhost:4000/auth/login', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    if (!response.ok) {
+      // Traiter les erreurs ici
+      console.log('Erreur de connexion.');
+      return;
+    }
+
+    // Le login a réussi, définir redirect sur true
+    setRedirect(true);
+
+  } catch (error) {
+    console.error('Une erreur s\'est produite lors de la tentative de connexion :', error);
+  }
+  
+};
+
+
+// Si redirect est true, rediriger vers la page d'accueil
+if (redirect) {
+  return <Navigate to="/admin/index" />;
+}
+
   return (
     <>
       <Col lg="5" md="7">
@@ -65,7 +106,7 @@ const Login = () => {
             <div className="text-center text-muted mb-4">
               <small>Or sign in with credentials</small>
             </div>
-            <Form role="form">
+            <Form role="form" onSubmit={submit}>
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
@@ -77,6 +118,7 @@ const Login = () => {
                     placeholder="Email"
                     type="email"
                     autoComplete="new-email"
+                    onChange={e => setEmail(e.target.value)}
                   />
                 </InputGroup>
               </FormGroup>
@@ -91,6 +133,7 @@ const Login = () => {
                     placeholder="Password"
                     type="password"
                     autoComplete="new-password"
+                    onChange={e => setPassword(e.target.value)}
                   />
                 </InputGroup>
               </FormGroup>
@@ -108,7 +151,7 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button">
+                <Button className="my-4" color="primary" type="submit" >
                   Sign in
                 </Button>
               </div>
