@@ -99,6 +99,10 @@ const Sidebar = (props) => {
       target: "_blank",
     };
   }
+  /* styles.css */
+
+
+
 
   return (
     <Navbar
@@ -122,6 +126,7 @@ const Sidebar = (props) => {
               alt={logo.imgAlt}
               className="navbar-brand-img"
               src={logo.imgSrc}
+              style={{ width: '27px', height: '40px' }}
             />
           </NavbarBrand>
         ) : null}
