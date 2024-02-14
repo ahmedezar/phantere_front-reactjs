@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = Invoive;
+exports["default"] = Invoice;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -11,7 +11,7 @@ var _mdbReactUiKit = require("mdb-react-ui-kit");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function Invoive() {
+function Invoice() {
   return _react["default"].createElement(_mdbReactUiKit.MDBContainer, {
     className: "py-5"
   }, _react["default"].createElement(_mdbReactUiKit.MDBCard, {

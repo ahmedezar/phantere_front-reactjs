@@ -8,7 +8,7 @@ import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
 import ListeUser from "views/examples/ListeUser";
-
+import Addinvoice from './views/examples/Addinvoice';
 
 var routes = [
   {
@@ -18,6 +18,7 @@ var routes = [
     component: <Index />,
     layout: "/admin",
   },
+  
   {
     path: "/icons",
     name: "Icons",
@@ -38,6 +39,13 @@ var routes = [
     icon: "ni ni-single-02 text-yellow",
     component: <Profile />,
     layout: "/admin",
+  },
+  {
+    path: "/invoice",
+    name: "Invoice",
+    icon: "ni ni-tv-2 text-primary",
+    component: <Addinvoice />,
+    layout: "/add",
   },
   {
     path: "/tables",
