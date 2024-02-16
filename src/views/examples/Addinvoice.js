@@ -1,4 +1,4 @@
-import { DeleteFilled, DeleteOutlined } from "@ant-design/icons";
+import { DeleteFilled, DeleteOutlined, FilePdfFilled, SaveFilled } from "@ant-design/icons";
 import IconContext from "@ant-design/icons/lib/components/Context";
 import { margin } from "@mui/system";
 import { useState } from "react";
@@ -64,8 +64,19 @@ const Addinvoice = () => {
         <Card className="bg-secondary shadow">
           <CardHeader className="bg-white border-2">
             <Row className="align-items-center">
-              <Col xs="8">
+              <Col lg="8">
                 <h3 className="mb-0">Add invoice</h3>
+              </Col>
+              <Col lg="2">
+              <Button 
+                        color="primary"
+                        className="ml-8"
+                        onClick=""
+                      >
+                      <FilePdfFilled />Save 
+                       
+                      </Button>
+                      
               </Col>
             </Row>
           </CardHeader>

@@ -45,8 +45,9 @@ var routes = [
     name: "Invoice",
     icon: "ni ni-tv-2 text-primary",
     component: <Addinvoice />,
-    layout: "/add",
+    layout: "/admin",
   },
+  
   {
     path: "/tables",
     name: "Tables",
